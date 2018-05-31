@@ -7,12 +7,15 @@ public class Main {
     public static void main(String args[]) {
         Scanner scanner = new Scanner(System.in);
         UserInterface ui = new UserInterface();
-        ui.requestStopId();
-        String stopId = scanner.nextLine();
-        RequestBuilder requestBuilder = new RequestBuilder();
-        List<Bus> buses = requestBuilder.getStopInformation(stopId);
-        ResponseProcessor responseProcessor = new ResponseProcessor();
-        System.out.println(responseProcessor.getNextFiveBuses(buses));
+        ui.requestPostcode();
+        String postcodeInput = scanner.nextLine();
+        Postcode postcode = PostcodeApiService.request(postcodeInput);
+        System.out.println(postcode);
+        TflApiRequestService tflApiRequestService = new TflApiRequestService();
+        List<StopPoint> stopPoints = tflApiRequestService.getNextNearestBuses(postcode.latitude, postcode.longitude);
+        System.out.println(ResponseProcessor.getClosestTwoStopPointIds(stopPoints));
+        List<Bus> buses = tflApiRequestService.getStopInformation("490008660N");
+        System.out.println(buses);
     }
 
     // Sample Id = 490008660N
