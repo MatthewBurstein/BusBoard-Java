@@ -1,5 +1,6 @@
 package training.busboard;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +10,9 @@ public class Main {
         ui.requestStopId();
         String stopId = scanner.nextLine();
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.getStopInformation(stopId);
+        List<Bus> buses = requestBuilder.getStopInformation(stopId);
+        ResponseProcessor responseProcessor = new ResponseProcessor();
+        System.out.println(responseProcessor.getNextFiveBuses(buses));
     }
 
     // Sample Id = 490008660N

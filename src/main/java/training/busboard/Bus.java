@@ -1,12 +1,26 @@
 package training.busboard;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Bus {
 
-    private final String timeToStation;
-    private final String destinationName;
+    public int timeToStation;
+    public String destinationName;
 
-    public Bus(String destinationName, String timeToStation) {
-        this.destinationName = destinationName;
-        this.timeToStation = timeToStation;
+    public Bus() {
+    }
+
+    public int getTimeToStation() {
+        return timeToStation;
+    }
+
+    public int getMinutes() {
+        return timeToStation / 60;
+    }
+
+    @Override
+    public String toString() {
+        return destinationName + " " + getMinutes() + "mins";
     }
 }
