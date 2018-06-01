@@ -1,7 +1,7 @@
-package training.busboard;
+package training.busboard.ApiServices;
 
-import com.fasterxml.classmate.GenericType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import training.busboard.Models.StopPoint;
 
 import java.util.List;
 

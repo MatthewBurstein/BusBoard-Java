@@ -1,4 +1,4 @@
-package training.busboard;
+package training.busboard.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
