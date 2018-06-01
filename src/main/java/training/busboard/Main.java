@@ -25,6 +25,4 @@ public class Main {
         List<Bus> buses = tflApiRequestService.getClosestStopPointBuses(stopPoints);
         System.out.println(buses);
     }
-
-    // Sample Id = 490008660N
 }	

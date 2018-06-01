@@ -1,18 +1,15 @@
 package training.busboard;
 
 import com.google.common.collect.Lists;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import training.busboard.Builders.BusBuilder;
 import training.busboard.Builders.StopPointBuilder;
 import training.busboard.Models.Bus;
 import training.busboard.Models.StopPoint;
 
-
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 
 public class ResponseProcessorTest {
@@ -20,7 +17,6 @@ public class ResponseProcessorTest {
     ResponseProcessor rp = new ResponseProcessor();
 
     @Test
-    @DisplayName("getNextFiveBuses() returns next five buses")
     public void getNextFiveBusesReturnsNextFiveBuses() {
         Bus bus1 = BusBuilder.buildWithTimeToStation(1);
         Bus bus2 = BusBuilder.buildWithTimeToStation(2);
@@ -36,7 +32,6 @@ public class ResponseProcessorTest {
     }
 
     @Test
-    @DisplayName("getClosestTwoStopPoints returns closest two stop points")
     public void getClosestTwoStopPointsReturnsClosestTwoStopPoints() {
         StopPoint sp1 = StopPointBuilder.buildWithDistance((float) 1.0);
         StopPoint sp2 = StopPointBuilder.buildWithDistance((float) 1.2);
