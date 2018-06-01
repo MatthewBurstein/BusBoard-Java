@@ -41,6 +41,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>2.0.3</version>
                 <configuration>
+                    <appName>enigmatic-wave-23188</appName>
                     <processTypes>
                         <web>java -jar -Dserver.port=$PORT target/busboard-web-1.0-SNAPSHOT.jar</web>
                     </processTypes>
