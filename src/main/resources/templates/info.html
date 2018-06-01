@@ -10,6 +10,20 @@
     <h2>Bus Information</h2>
     <div>
         <p>You entered postcode <span th:text="${busInfo.postcode}"></span></p>
+        <table>
+            <tr>
+                <th>Stop</th>
+                <th>Destination</th>
+                <th>Departing</th>
+            </tr>
+            <tr th:each="bus: ${busInfo.buses}">
+                <td th:text="${bus.getStop()}"></td>
+                <td th:text="${bus.destinationName}"></td>
+                <td th:text="${bus.getMinutes()}"></td>
+
+            </tr>
+
+        </table>
     </div>
 </div>
 </body>
