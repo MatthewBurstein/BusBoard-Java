@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TflApiRequestService {
 
-    private static String APP_ID_AND_KEY = "app_id=1134a3b4&app_key=6f4a38870add579a1dc48219346fa78f";
+    private static String APP_ID_AND_KEY = "app_id=" + System.getenv("TFL_API_ID") + "&app_key=" + System.getenv("TFL_API_KEY");
 
     public List<StopPoint> getNearestStops(float lat, float lon) {
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
