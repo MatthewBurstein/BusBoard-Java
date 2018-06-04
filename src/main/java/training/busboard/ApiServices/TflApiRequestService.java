@@ -25,10 +25,11 @@ public class TflApiRequestService {
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
         String uri = "https://api.tfl.gov.uk/StopPoint" + "?stopTypes=NaptanPublicBusCoachTram&radius=500&lat=" + lat + "&lon=" + lon + "&" + APP_ID_AND_KEY;
         TflApiRadiusResponseService response = client.target(uri).request(MediaType.APPLICATION_JSON).get(TflApiRadiusResponseService.class);
-        if (response.getTotal() == 0) {
+        System.out.println(response.getStopPoints().size());
+        if (response.getStopPoints().size() == 0) {
             LOGGER.warn("No stop points detected");
         } else {
-            LOGGER.log(Level.INFO, "Stop points recieved from TFL API");
+            LOGGER.log(Level.INFO, "Stop points received from TFL API");
         }
         return response.getStopPoints();
     }
