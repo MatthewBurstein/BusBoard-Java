@@ -1,40 +1,39 @@
 package training.busboard.Models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Bus {
 
-    public int timeToStation;
+    public int timeToStationInSeconds;
     public String destinationName;
     public String stationName;
-    public String lineName;
     public String platformName;
 
-    public Bus() {
-    }
-
-    public Bus(int timeToStation, String destinationName, String stationName, String lineName, String platformName) {
-        this.timeToStation = timeToStation;
+    @JsonCreator
+    public Bus(@JsonProperty("timeToStation") int timeToStation,
+               @JsonProperty("destinationName") String destinationName,
+               @JsonProperty("stationName") String stationName,
+               @JsonProperty("platformName") String platformName) {
+        this.timeToStationInSeconds = timeToStation;
         this.destinationName = destinationName;
         this.stationName = stationName;
-        this.lineName = lineName;
         this.platformName = platformName;
     }
 
     public int getTimeToStation() {
-        return timeToStation;
+        return timeToStationInSeconds;
     }
 
-    public int getMinutes() {
-        return timeToStation / 60;
+    public String getMinutes() {
+
+        return (timeToStationInSeconds / 60) + "min ";
     }
 
-    @Override
-    public String toString() {
-        String representation = "Destination: " + destinationName +
-                "\nArriving: " + getMinutes() + "mins" +
-                "\nStop: " + stationName + " " + platformName + "\n";
-        return representation;
+    public String getStop() {
+        return stationName + " " + platformName;
     }
+
 }

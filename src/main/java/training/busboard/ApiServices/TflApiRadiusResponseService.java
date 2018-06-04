@@ -8,7 +8,14 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TflApiRadiusResponseService {
 
-    public List<StopPoint> stopPoints;
-    public int total;
+    private List<StopPoint> stopPoints;
+    private int total;
 
+    public int getTotal() {
+        return total;
+    }
+
+    public List<StopPoint> getStopPoints() {
+        return stopPoints;
+    }
 }

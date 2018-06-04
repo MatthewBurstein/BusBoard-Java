@@ -1,6 +1,7 @@
 package training.busboard;
 
 import training.busboard.ApiServices.PostcodeApiRequestService;
+import training.busboard.ApiServices.ResponseProcessor;
 import training.busboard.ApiServices.TflApiRequestService;
 import training.busboard.Models.Bus;
 import training.busboard.Models.Postcode;
@@ -20,7 +21,7 @@ public class Main {
         String postcodeInput = scanner.nextLine();
         Postcode postcode = postcodeApiRequestService.request(postcodeInput);
         System.out.println(postcode);
-        List<StopPoint> stopPoints = tflApiRequestService.getNearestStops(postcode.latitude, postcode.longitude);
+        List<StopPoint> stopPoints = tflApiRequestService.getNearestStopPoints(postcode.latitude, postcode.longitude);
         stopPoints = rp.getClosestTwoStopPointIds(stopPoints);
         List<Bus> buses = tflApiRequestService.getClosestStopPointBuses(stopPoints);
         System.out.println(buses);
