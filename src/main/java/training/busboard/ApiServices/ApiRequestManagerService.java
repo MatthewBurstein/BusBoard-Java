@@ -19,7 +19,7 @@ public class ApiRequestManagerService {
         try {
             TflApiRequestService tflApiRequestService = new TflApiRequestService();
             Postcode postcodeObj = new PostcodeApiRequestService().request(postcode);
-            List<StopPoint> stopPoints = tflApiRequestService.getNearestStops(postcodeObj.latitude, postcodeObj.longitude);
+            List<StopPoint> stopPoints = tflApiRequestService.getNearestStopPoints(postcodeObj.latitude, postcodeObj.longitude);
             stopPoints = new ResponseProcessor().getClosestTwoStopPointIds(stopPoints);
             buses = tflApiRequestService.getClosestStopPointBuses(stopPoints);
             LOGGER.log(Level.INFO, "Api Interaction successfull");
