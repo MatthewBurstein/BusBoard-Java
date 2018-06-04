@@ -1,6 +1,7 @@
 package training.busboard.ApiServices;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import training.busboard.Models.StopPoint;
 
 import java.util.List;
@@ -9,11 +10,6 @@ import java.util.List;
 public class TflApiRadiusResponseService {
 
     private List<StopPoint> stopPoints;
-    private int total;
-
-    public int getTotal() {
-        return total;
-    }
 
     public List<StopPoint> getStopPoints() {
         return stopPoints;

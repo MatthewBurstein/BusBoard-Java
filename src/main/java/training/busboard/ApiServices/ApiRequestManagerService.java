@@ -22,7 +22,7 @@ public class ApiRequestManagerService {
             List<StopPoint> stopPoints = tflApiRequestService.getNearestStopPoints(postcodeObj.latitude, postcodeObj.longitude);
             stopPoints = new ResponseProcessor().getClosestTwoStopPointIds(stopPoints);
             buses = tflApiRequestService.getClosestStopPointBuses(stopPoints);
-            LOGGER.log(Level.INFO, "Api Interaction successfull");
+            LOGGER.log(Level.INFO, "Api Interaction successful");
         } catch (NotFoundException e){
             LOGGER.log(Level.ERROR, "Api interaction failed for postcode: " + postcode + ": " + e.getStackTrace());
         }
