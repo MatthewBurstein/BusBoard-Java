@@ -1,25 +1,24 @@
 package training.busboard.web;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import training.busboard.ApiServices.PostcodeApiRequestService;
-import training.busboard.ApiServices.TflApiRequestService;
+import training.busboard.ApiServices.*;
 import training.busboard.Models.Bus;
-import training.busboard.Models.Postcode;
-import training.busboard.Models.StopPoint;
-import training.busboard.ResponseProcessor;
-import training.busboard.UserInterface;
+import training.busboard.Models.PostcodeError;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Controller
 @EnableAutoConfiguration
 public class Website {
+
+    Logger LOGGER = LogManager.getLogger("ControllerLogging");
 
     @RequestMapping("/")
     ModelAndView home() {
@@ -28,18 +27,21 @@ public class Website {
 
     @RequestMapping("/busInfo")
     ModelAndView busInfo(@RequestParam("postcode") String postcode) {
-        TflApiRequestService tflApiRequestService = new TflApiRequestService();
-        PostcodeApiRequestService postcodeApiRequestService= new PostcodeApiRequestService();
-        ResponseProcessor rp = new ResponseProcessor();
-        Postcode postcodeObj = postcodeApiRequestService.request(postcode);
-        List<StopPoint> stopPoints = tflApiRequestService.getNearestStops(postcodeObj.latitude, postcodeObj.longitude);
-        stopPoints = rp.getClosestTwoStopPointIds(stopPoints);
-        List<Bus> buses = tflApiRequestService.getClosestStopPointBuses(stopPoints);
-        return new ModelAndView("info", "busInfo", new BusInfo(postcode, buses)) ;
+        ApiRequestManagerService apiService = new ApiRequestManagerService();
+        List<Bus> buses = apiService.getBusStopInfo(postcode);
+        if (buses != null) {
+            return new ModelAndView("info", "busInfo", new BusInfo(postcode, buses));
+        } else {
+            return postcodeError(new PostcodeError(postcode));
+        }
     }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Website.class, args);
     }
 
+    @RequestMapping("/postcodeError")
+    ModelAndView postcodeError(PostcodeError error) {
+        return new ModelAndView("error", "postcodeError", error);
+    }
 }

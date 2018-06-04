@@ -2,6 +2,7 @@ package training.busboard;
 
 import com.google.common.collect.Lists;
 import org.junit.Test;
+import training.busboard.ApiServices.ResponseProcessor;
 import training.busboard.Builders.BusBuilder;
 import training.busboard.Builders.StopPointBuilder;
 import training.busboard.Models.Bus;

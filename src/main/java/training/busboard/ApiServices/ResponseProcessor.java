@@ -1,4 +1,4 @@
-package training.busboard;
+package training.busboard.ApiServices;
 
 import training.busboard.Models.Bus;
 import training.busboard.Models.StopPoint;
@@ -14,7 +14,7 @@ public class ResponseProcessor {
     }
 
     public List<StopPoint> getClosestTwoStopPointIds(List<StopPoint> stopPoints) {
-        stopPoints.sort((sp1, sp2) -> Float.compare(sp1.distance, sp2.distance));
+        stopPoints.sort((sp1, sp2) -> Float.compare(sp1.getDistanceInMeters(), sp2.getDistanceInMeters()));
         return stopPoints.subList(0, 2);
     }
 
